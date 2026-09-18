@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HDB Resale Flat Clustering &amp; Price Forecasting</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --fg: #1a1a1a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #2a78d6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --fg: #e5e5e5;
+        --muted: #9ca3af;
+        --border: #2a2a2a;
+        --accent: #5b9bf0;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .section p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+    .tableau-embed {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      min-height: 600px;
+    }
+    .tableau-embed iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 600px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .links a:hover { text-decoration: underline; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>HDB Resale Flat Clustering &amp; Price Forecasting</h1>
+    <p class="subtitle">
+      Unsupervised segmentation of Singapore HDB towns by price behavior,
+      with an honest test of whether clustering improves price prediction.
+    </p>
+
+    <div class="section">
+      <h2>Interactive Dashboard</h2>
+      <div class="tableau-embed">
+        <!-- Replace TABLEAU_EMBED_URL with your Tableau Public embed URL -->
+        <!-- Example: <iframe src="https://public.tableau.com/views/YourViz?:embed=y&:display_count=no"></iframe> -->
+        <div class="placeholder">Tableau Public dashboard will be embedded here after publishing.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>What this project does</h2>
+      <p>
+        Clusters HDB towns and flat-types by price behavior — median price, growth rate,
+        remaining lease — so a buyer can find towns that behave similarly to the one they
+        are looking at, but at a different price point.
+      </p>
+      <p>
+        The real contribution: testing whether adding the cluster assignment as a feature
+        actually improves a price forecasting model, trained and backtested the same way
+        with and without it. Either result is a legitimate finding.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Source</h2>
+      <div class="links">
+        <a href="https://github.com/axellee1994/hdb_resale_cluster_forecasting">GitHub repository</a>
+        <a href="https://data.gov.sg">Data: data.gov.sg</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>Data from the Housing &amp; Development Board via data.gov.sg. Not financial advice.</p>
+    </footer>
+  </div>
+</body>
+</html>
