@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HDB Resale Flat Clustering &amp; Price Forecasting</title>
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
   <style>
     :root {
       --bg: #fafafa;
@@ -66,10 +67,9 @@
       min-height: 650px;
       margin-bottom: 24px;
     }
-    .tableau-embed iframe {
+    .tableau-embed tableau-viz {
       width: 100%;
-      height: 650px;
-      border: none;
+      min-height: 650px;
     }
     .tab-nav {
       display: flex;
@@ -177,10 +177,16 @@
         <button onclick="switchTab('db2', this)">Market Detail</button>
       </div>
       <div class="tableau-embed" id="db1">
-        <iframe src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard1?:embed=y&:display_count=no&:showVizHome=no" allowfullscreen></iframe>
+        <tableau-viz id="viz1"
+          src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard1"
+          toolbar="bottom" hide-tabs>
+        </tableau-viz>
       </div>
       <div class="tableau-embed" id="db2" style="display:none;">
-        <iframe src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard2?:embed=y&:display_count=no&:showVizHome=no" allowfullscreen></iframe>
+        <tableau-viz id="viz2"
+          src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard2"
+          toolbar="bottom" hide-tabs>
+        </tableau-viz>
       </div>
     </div>
 
