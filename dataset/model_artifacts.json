@@ -1,0 +1,46 @@
+{
+  "generated": "2026-09-18T20:22:34",
+  "data_source": "d_8b84c4ee58e3cfc0ece0d773c8ca6abc",
+  "total_transactions": 240610,
+  "date_range": [
+    "2017-01",
+    "2026-09"
+  ],
+  "clustering": {
+    "k": 3,
+    "silhouette_score": 0.401,
+    "stability_score": 0.34503225806451615,
+    "stability_runs": 20,
+    "features": [
+      "median_price",
+      "growth_rate",
+      "avg_remaining_lease"
+    ],
+    "n_combos": 125,
+    "cluster_labels": {
+      "0": "Premium",
+      "1": "Newer, High-Growth",
+      "2": "Mature & Affordable"
+    },
+    "cluster_sizes": {
+      "0": 42,
+      "1": 53,
+      "2": 30
+    }
+  },
+  "forecasting": {
+    "model": "HistGradientBoostingRegressor",
+    "holdout_months": 6,
+    "holdout_transactions": 12574,
+    "without_cluster": {
+      "mae": 44555.42,
+      "rmse": 63760.87,
+      "mape": 6.58
+    },
+    "with_cluster": {
+      "mae": 43067.14,
+      "rmse": 60962.15,
+      "mape": 6.39
+    }
+  }
+}

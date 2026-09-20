@@ -63,20 +63,59 @@
       border-radius: 8px;
       overflow: hidden;
       background: #fff;
-      min-height: 600px;
+      min-height: 650px;
+      margin-bottom: 24px;
     }
     .tableau-embed iframe {
       width: 100%;
-      height: 600px;
+      height: 650px;
       border: none;
     }
-    .placeholder {
+    .tab-nav {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 600px;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tab-nav button {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--fg);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .tab-nav button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .metric-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric-card .label {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .metric-card .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .metric-card .detail {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 4px;
     }
     .links {
       display: flex;
@@ -106,25 +145,55 @@
     </p>
 
     <div class="section">
+      <h2>Key Results</h2>
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="label">Clusters Found</div>
+          <div class="value">3</div>
+          <div class="detail">Silhouette score: 0.401</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Forecast MAPE</div>
+          <div class="value">6.39%</div>
+          <div class="detail">With cluster feature (vs 6.58% without)</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">MAE Improvement</div>
+          <div class="value">$1,488</div>
+          <div class="detail">$43,067 vs $44,555 per transaction</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Transactions</div>
+          <div class="value">240,610</div>
+          <div class="detail">Jan 2017 – Sep 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
       <h2>Interactive Dashboard</h2>
-      <div class="tableau-embed">
-        <!-- Replace TABLEAU_EMBED_URL with your Tableau Public embed URL -->
-        <!-- Example: <iframe src="https://public.tableau.com/views/YourViz?:embed=y&:display_count=no"></iframe> -->
-        <div class="placeholder">Tableau Public dashboard will be embedded here after publishing.</div>
+      <div class="tab-nav">
+        <button class="active" onclick="switchTab('db1', this)">Overview</button>
+        <button onclick="switchTab('db2', this)">Market Detail</button>
+      </div>
+      <div class="tableau-embed" id="db1">
+        <iframe src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard1?:embed=y&:display_count=no&:showVizHome=no" allowfullscreen></iframe>
+      </div>
+      <div class="tableau-embed" id="db2" style="display:none;">
+        <iframe src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard2?:embed=y&:display_count=no&:showVizHome=no" allowfullscreen></iframe>
       </div>
     </div>
 
     <div class="section">
       <h2>What this project does</h2>
       <p>
-        Clusters HDB towns and flat-types by price behavior — median price, growth rate,
-        remaining lease — so a buyer can find towns that behave similarly to the one they
-        are looking at, but at a different price point.
+        Clusters 125 HDB (town, flat-type) combinations into three segments — Mature &amp; Affordable,
+        Newer High-Growth, and Premium — using K-Means on median price, growth rate, and remaining lease.
       </p>
       <p>
-        The real contribution: testing whether adding the cluster assignment as a feature
-        actually improves a price forecasting model, trained and backtested the same way
-        with and without it. Either result is a legitimate finding.
+        Tests whether adding the cluster assignment as a feature improves a HistGradientBoosting
+        price model. Result: a modest but consistent improvement (MAE drops ~3.3%), confirming
+        the clusters capture signal beyond what raw town and flat-type encodings provide.
       </p>
     </div>
 
@@ -140,5 +209,13 @@
       <p>Data from the Housing &amp; Development Board via data.gov.sg. Not financial advice.</p>
     </footer>
   </div>
+  <script>
+    function switchTab(id, btn) {
+      document.getElementById('db1').style.display = id === 'db1' ? '' : 'none';
+      document.getElementById('db2').style.display = id === 'db2' ? '' : 'none';
+      document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
 </body>
 </html>

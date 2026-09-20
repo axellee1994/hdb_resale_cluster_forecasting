@@ -15,3 +15,6 @@ Thumbs.db
 .env
 .venv/
 venv/
+
+# cached raw data (re-fetchable from data.gov.sg API)
+dataset/hdb_resale_raw.csv
