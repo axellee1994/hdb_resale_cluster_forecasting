@@ -58,18 +58,21 @@
       font-size: 0.95rem;
       margin-bottom: 12px;
     }
+    .dashboard-section {
+      max-width: 1250px;
+      margin: 0 auto 40px;
+    }
     .tableau-embed {
       width: 100%;
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
       background: #fff;
-      min-height: 650px;
       margin-bottom: 24px;
     }
     .tableau-embed tableau-viz {
       width: 100%;
-      min-height: 650px;
+      height: 900px;
     }
     .tab-nav {
       display: flex;
@@ -170,25 +173,29 @@
       </div>
     </div>
 
-    <div class="section">
-      <h2>Interactive Dashboard</h2>
-      <div class="tab-nav">
-        <button class="active" onclick="switchTab('db1', this)">Overview</button>
-        <button onclick="switchTab('db2', this)">Market Detail</button>
-      </div>
-      <div class="tableau-embed" id="db1">
-        <tableau-viz id="viz1"
-          src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard1"
-          toolbar="bottom" hide-tabs>
-        </tableau-viz>
-      </div>
-      <div class="tableau-embed" id="db2" style="display:none;">
-        <tableau-viz id="viz2"
-          src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard2"
-          toolbar="bottom" hide-tabs>
-        </tableau-viz>
-      </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2 style="font-size:1.15rem;font-weight:600;margin-bottom:12px;">Interactive Dashboard</h2>
+    <div class="tab-nav">
+      <button class="active" onclick="switchTab('db1', this)">Overview</button>
+      <button onclick="switchTab('db2', this)">Market Detail</button>
     </div>
+    <div class="tableau-embed" id="db1">
+      <tableau-viz id="viz1"
+        src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard1"
+        toolbar="bottom" hide-tabs>
+      </tableau-viz>
+    </div>
+    <div class="tableau-embed" id="db2" style="display:none;">
+      <tableau-viz id="viz2"
+        src="https://public.tableau.com/views/HDBResaleFlatClusteringPriceForecasting/Dashboard2"
+        toolbar="bottom" hide-tabs>
+      </tableau-viz>
+    </div>
+  </div>
+
+  <div class="container">
 
     <div class="section">
       <h2>What this project does</h2>
