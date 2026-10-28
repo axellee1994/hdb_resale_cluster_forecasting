@@ -1,46 +1,46 @@
 {
-  "generated": "2026-09-18T20:22:34",
+  "generated": "2026-10-28T11:11:13",
   "data_source": "d_8b84c4ee58e3cfc0ece0d773c8ca6abc",
-  "total_transactions": 240610,
+  "total_transactions": 243652,
   "date_range": [
     "2017-01",
-    "2026-09"
+    "2026-10"
   ],
   "clustering": {
     "k": 3,
-    "silhouette_score": 0.401,
-    "stability_score": 0.34503225806451615,
+    "silhouette_score": 0.4025,
+    "stability_score": 0.3448888888888889,
     "stability_runs": 20,
     "features": [
       "median_price",
       "growth_rate",
       "avg_remaining_lease"
     ],
-    "n_combos": 125,
+    "n_combos": 126,
     "cluster_labels": {
-      "0": "Premium",
+      "0": "Mature & Affordable",
       "1": "Newer, High-Growth",
-      "2": "Mature & Affordable"
+      "2": "Premium"
     },
     "cluster_sizes": {
-      "0": 42,
+      "0": 30,
       "1": 53,
-      "2": 30
+      "2": 43
     }
   },
   "forecasting": {
     "model": "HistGradientBoostingRegressor",
     "holdout_months": 6,
-    "holdout_transactions": 12574,
+    "holdout_transactions": 13657,
     "without_cluster": {
-      "mae": 44555.42,
-      "rmse": 63760.87,
-      "mape": 6.58
+      "mae": 46292.87,
+      "rmse": 67304.89,
+      "mape": 6.73
     },
     "with_cluster": {
-      "mae": 43067.14,
-      "rmse": 60962.15,
-      "mape": 6.39
+      "mae": 45478.93,
+      "rmse": 64995.89,
+      "mape": 6.65
     }
   }
 }

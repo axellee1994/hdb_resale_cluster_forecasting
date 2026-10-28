@@ -6,26 +6,26 @@ Groups Singapore's HDB resale market into clusters of (town, flat type) combinat
 
 ## The result
 
-The same gradient-boosting model was trained twice, with and without the cluster label, and scored on the last 6 months of sales (12,574 transactions, Apr to Sep 2026). It never saw those months in training.
+The same gradient-boosting model was trained twice, with and without the cluster label, and scored on the last 6 months of sales (13,657 transactions, May to Oct 2026). Neither the model nor the clusters saw those months.
 
-| Holdout (Apr-Sep 2026) | MAE | RMSE | MAPE |
+| Holdout (May-Oct 2026) | MAE | RMSE | MAPE |
 |---|--:|--:|--:|
-| Without cluster | $44,555 | $63,761 | 6.58% |
-| With cluster | **$43,067** | **$60,962** | **6.39%** |
+| Without cluster | $46,293 | $67,305 | 6.73% |
+| With cluster | **$45,479** | **$64,996** | **6.65%** |
 
-Adding the cluster cuts MAE by 3.3% and RMSE by 4.4%. A small but real gain: the clusters carry town-level price behaviour that the town and flat-type codes alone miss.
+Adding the cluster cuts MAE by 1.8% and RMSE by 3.4%. A small but consistent gain: the clusters carry town-level price behaviour that the town and flat-type codes alone miss. An earlier run on data to Sep 2026 gave 3.3% (MAE), so the size of the gain moves with the holdout window.
 
 ## The clusters
 
-240,610 resale transactions (Jan 2017 to Sep 2026) are reduced to 125 (town, flat type) combinations with at least 30 sales each. Each is described by median price, price growth and average remaining lease, then grouped with K-Means.
+243,652 resale transactions (Jan 2017 to Oct 2026) are reduced to 126 (town, flat type) combinations with at least 30 sales each. Each is described by median price, price growth and average remaining lease, then grouped with K-Means.
 
 | Cluster | Combinations | Median price | Price growth | Avg remaining lease | Typical members |
 |---|--:|--:|--:|--:|---|
-| Premium | 42 | $799,500 | 26.8% | 68.8 years | 4-room to executive flats in mature estates |
-| Newer, High-Growth | 53 | $462,500 | 41.2% | 79.0 years | Punggol, Sengkang, Woodlands, Sembawang |
-| Mature & Affordable | 30 | $358,400 | 32.7% | 59.3 years | 1- to 4-room flats with older leases |
+| Premium | 43 | $790,000 | 24.4% | 68.7 years | 4-room to executive flats in mature estates |
+| Newer, High-Growth | 53 | $458,000 | 39.7% | 79.2 years | Punggol, Sengkang, Woodlands, Sembawang |
+| Mature & Affordable | 30 | $355,000 | 31.1% | 59.3 years | 1- to 4-room flats with older leases |
 
-- **k = 3** has the best silhouette score (0.401) of k = 3 to 10, and the groups make real-world sense.
+- **k = 3** has the best silhouette score (0.403) of k = 3 to 10, and the groups make real-world sense.
 - **Stable:** across 20 runs with different random seeds, every pair of combinations either always or never landed in the same cluster.
 
 ## How it works
@@ -49,12 +49,13 @@ Tableau Public dashboards (published at docs/index.html)
 **Kept honest by construction:**
 
 - **Temporal split, not random.** A random split would let the model train on 2026 sales and "predict" other 2026 sales. The holdout is the last 6 months, fixed before any model is fitted.
+- **Clusters built from training months only**, so the cluster label carries no information about holdout prices.
 - **One change between the two models.** Same features, same hyperparameters, same split; only the `cluster_id` column differs.
 - **Clusters are chosen by the data and then sanity-checked**, not picked by hand.
 
 ## Limitations
 
-- **The clusters were built on the full period, including the 6 holdout months.** The cluster label therefore carries a little information about holdout prices, which may flatter the with-cluster model. Building the clusters on training months only is the clean fix; until then, treat the 3.3% gain as an upper bound.
+- **The data changes.** data.gov.sg adds late-registered sales to past months, so a rerun gives slightly different numbers.
 - **One holdout window.** A rolling backtest over several 6-month windows would show whether the gain holds across market conditions.
 - **No location detail below town level** (distance to MRT, schools); these were considered but not added.
 
